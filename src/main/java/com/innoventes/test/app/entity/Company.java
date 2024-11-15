@@ -30,15 +30,23 @@ public class Company extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company_seq")
 	private Long id;
 
+	@NotBlank(message = "company name can't be null or empty")
 	@Column(name = "company_name")
+	@Size(min = 5)
 	private String companyName;
 
 	@Column(name = "email")
+	@NotBlank(message = "Email can't be null or empty")
+	@Email(message = "Not a valid email")
 	private String email;
 	
+	@Min(0)
 	@Column(name = "strength")
 	private Integer strength;
 	
 	@Column(name = "website_url")
 	private String webSiteURL;
+
+	@ValidateCompanyCode
+	private String companyCode;
 }
